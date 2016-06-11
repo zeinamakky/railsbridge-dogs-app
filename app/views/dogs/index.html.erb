@@ -1,19 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Dogs</h1>
+<% Breed.all.each do |b| %>
+  <%= link_to b.name, dogs_path(breed_id: b.id) %>
+<% end %>
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th>Age</th>
+      <th>Breed</th>
+      <th>Photo</th>
     </tr>
   </thead>
 
   <tbody>
     <% @dogs.each do |dog| %>
       <tr>
-      <td>Your dog's name is <%= dog.name %>, age <%= dog.age %>. Its breed is: <%= dog.breed %> </td>
+      <td><%= dog.name %></td> 
+      <td><%= dog.age %></td>
+      <td><%= dog.breed.try(:name) %></td>
+
         <td>
           <%= image_tag(dog.picture_url(:thumb))  unless dog.picture_url(:thumb).blank? %>
         </td>
@@ -31,6 +39,8 @@
   <%= link_to "by age", dogs_path(sort_by: :age) %>
 </p>
 <p>Filter:
+  <%= link_to "all dogs", dogs_path %>
+
   <%= link_to "dogs under 5yo", dogs_path(babies: :true) %>
   <%= link_to "dogs with pictures", dogs_path(pictures: :true) %>
 </p>

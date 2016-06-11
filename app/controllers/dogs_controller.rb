@@ -9,8 +9,12 @@ class DogsController < ApplicationController
       @dogs = @dogs.sort_by do |dog|
         dog.send(params[:sort_by])
       end
+    elsif params[:babies]
+      @dogs = Dog.all.select{|d| d.age < 5 }
+    elsif params[:pictures]
+      @dogs = Dog.all.select{|d| !(d.picture_url.blank?) }
     else
-        @dogs = Dog.all
+      @dogs = Dog.all
     end
   end
 
@@ -76,6 +80,6 @@ class DogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def dog_params
-      params.require(:dog).permit(:name, :age, :breed, :picture)
+      params.require(:dog).permit(:name, :age, :breed, :picture, :breed_id)
     end
 end
