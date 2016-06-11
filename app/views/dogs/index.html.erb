@@ -13,7 +13,7 @@
   <tbody>
     <% @dogs.each do |dog| %>
       <tr>
-      <td>Your dog's name is <%= dog.name %></td>
+      <td>Your dog's name is <%= dog.name %>, age <%= dog.age %> </td>
         <td><%= link_to 'Show', dog %></td>
         <td><%= link_to 'Edit', edit_dog_path(dog) %></td>
         <td><%= link_to 'Destroy', dog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
