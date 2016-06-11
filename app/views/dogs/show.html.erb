@@ -14,5 +14,9 @@
  <%= @dog.breed %>
 </p>
 
+<p>
+  <%= image_tag(@dog.picture_url)  unless @dog.picture_url.blank? %>
+</p>
+
 <%= link_to 'Edit', edit_dog_path(@dog) %> |
 <%= link_to 'Back', dogs_path %>
