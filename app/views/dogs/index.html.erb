@@ -1,8 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Dogs</h1>
-<% Breed.all.each do |b| %>
+Filter by breed: <% Breed.all.each do |b| %>
   <%= link_to b.name, dogs_path(breed_id: b.id) %>
+<% end %>
+<hr>
+<% if params[:breed_id] %>
+  <h2><%= @breed.name %>: <%= @breed.description %></h2>
 <% end %>
 
 <table>

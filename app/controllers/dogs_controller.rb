@@ -10,9 +10,12 @@ class DogsController < ApplicationController
         dog.send(params[:sort_by])
       end
     elsif params[:babies]
-      @dogs = Dog.all.select{|d| d.age < 5 }
+      @dogs = Dog.all.select { |d| d.age < 5 }
     elsif params[:pictures]
-      @dogs = Dog.all.select{|d| !(d.picture_url.blank?) }
+      @dogs = Dog.all.select { |d| !(d.picture_url.blank?) }
+    elsif params[:breed_id]
+      @dogs = Breed.find(params[:breed_id]).dogs
+      @breed = Breed.find(params[:breed_id])
     else
       @dogs = Dog.all
     end
