@@ -5,6 +5,13 @@ class DogsController < ApplicationController
   # GET /dogs.json
   def index
     @dogs = Dog.all
+    if params[:sort_by]
+      @dogs = @dogs.sort_by do |dog|
+        dog.send(params[:sort_by])
+      end
+    else
+        @dogs = Dog.all
+    end
   end
 
   # GET /dogs/1
